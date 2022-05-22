@@ -68,7 +68,7 @@ const SignUp = () => {
         axios
         .post("https://ci-gsc.com/user/", record)
         .then((res) => alert("Account Created"))
-        .catch((err) => alert("Please fillup the mandatory fields, the ones with the asterisks * "));
+        .catch((err) =>  alert("Temporarily facing server issues. Please contact d_bdc.contacts@yahoo.com for further details"));
         
         axios
         .post("https://ci-gsc.com/agents/", agent_record)
@@ -161,7 +161,7 @@ const SignUp = () => {
                   onChange={(event) => setMobile(event.target.value)}
                   name="mobile"
                  
-                  placeholder="Please include country code" />
+                  placeholder="Your Mobile number with country code" />
               </Col>
             </FormGroup>
             <FormGroup row>

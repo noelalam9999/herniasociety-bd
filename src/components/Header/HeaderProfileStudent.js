@@ -64,6 +64,7 @@ const Header = () => {
       let todoList = await res.json();
       let filtered = todoList.filter(function(val, i, a) {return val.email==authUser;});
       setList(filtered[0].image)
+     
     } catch (e) {
       console.log(e);
   }
@@ -97,7 +98,7 @@ const Header = () => {
       setShowReveal(false);
     }
   });
-console.log(authUser)
+  
   return (
     <>
       <SiteHeader
@@ -300,9 +301,14 @@ console.log(authUser)
                       as="a"
                       className="proile media ml-7 flex-y-center"
                     >
-                      <div className="circle-40">
-                      <img style={{height:"40px",borderRadius:"15px"}} src={"https://ci-gsc.com"+List} alt="" />
-                      </div>
+                     
+                      {List.length==0 && <div className="circle-40">
+                      <img style={{height:"40px",borderRadius:"30px"}} src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1649709652/profile-pic_rurvha.jpg" alt="" />
+                      </div>}
+
+                      {List.length!=0 && <div className="circle-40">
+                      <img style={{height:"40px",borderRadius:"30px"}} src={"https://ci-gsc.com"+List} alt="" />
+                      </div>}
                       <i className="fas fa-chevron-down heading-default-color ml-6"></i>
                     </Dropdown.Toggle>
                     {size.width <= 991 ? (

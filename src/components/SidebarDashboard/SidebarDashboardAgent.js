@@ -12,7 +12,7 @@ const SidebarDashboardAgent = () => {
    const { authUser, loading,signOut } = useAuth();
    const [isActive,setIsActive] = useState(false)
    const router = useRouter();
-
+   const path = router.asPath;
    const onAddStudentClick = ()=>{
 if (isActive == true){
   router.push("/agents/agent-dashboard-client-registration")  
@@ -67,45 +67,78 @@ useEffect(() =>  {
           </div>
           <ul className="list-unstyled dashboard-layout-sidebar">
             <li className="">
-              <Link href="/agents/agent-dashboard">
+            { path=="/agents/agent-dashboard" && 
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/monitor_yahvra.png" alt="" />Dashboard
+                </a>
+              }
+              { path!="/agents/agent-dashboard" &&   <Link href="/agents/agent-dashboard">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/monitor_yahvra.png" alt="" />Dashboard
                 </a>
-              </Link>
+              </Link> }
             </li>
             <li className="">
-              <Link href="/agents/agent-dashboard-applications">
+            { path=="/agents/agent-dashboard-applications" &&  
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/resume_h1xatk.png" alt="" />Applications
+                </a>
+           }
+              { path!="/agents/agent-dashboard-applications" &&   <Link href="/agents/agent-dashboard-applications">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/resume_h1xatk.png" alt="" />Applications
                 </a>
-              </Link>
+              </Link> }
             </li>
             <li className="">
-              <Link href="/agents/agent-dashboard-clients">
+            { path=="/agents/agent-dashboard-clients" &&  
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903932/rating_ks3yvo.png" alt="" />Students
+                </a>
+         }
+
+              { path!="/agents/agent-dashboard-clients" &&   <Link href="/agents/agent-dashboard-clients">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903932/rating_ks3yvo.png" alt="" />Students
                 </a>
-              </Link>
+              </Link> }
             </li>
             <li className="">
-              <Link href="/agents/agent-dashboard-applications-approved">
+            { path=="/agents/agent-dashboard-applications-approved" &&  
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640905537/checked_ticvfe.png" alt="" />Approved{" "}
+                  {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
+                    1
+                  </span> */}
+                </a>
+               }
+              { path!="/agents/agent-dashboard-applications-approved" &&   <Link href="/agents/agent-dashboard-applications-approved">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640905537/checked_ticvfe.png" alt="" />Approved{" "}
                   {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
                     1
                   </span> */}
                 </a>
-              </Link>
+              </Link>  }
             </li>
             <li className="">
-              <Link href="/agents/agent-dashboard-agents">
+            { path=="/agents/agent-dashboard-agents" &&  
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903930/agent_ygpzuw.png" alt="" />Sub-agents{" "}
+                  {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
+                    1
+                  </span> */}
+                </a>
+            }
+
+              { path!="/agents/agent-dashboard-agents" &&   <Link href="/agents/agent-dashboard-agents">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903930/agent_ygpzuw.png" alt="" />Sub-agents{" "}
                   {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
                     1
                   </span> */}
                 </a>
-              </Link>
+              </Link>  }
             </li>
             {/* <li className="">
               <Link href="/dashboard-settings">

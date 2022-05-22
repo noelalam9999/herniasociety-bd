@@ -80,10 +80,11 @@ const SignUp = () => {
     setError(null)
     //check if passwords match. If they do, create user in Firebase
     // and redirect to your logged in page.
-    if(name!="" & StudyDestination!="" & Desiredlevel!="" & email!="" & mobile!="" ){
+    if(name!="" & StudyDestinationdata!="" & Desiredleveldata!="" & email!="" & mobile!="" ){
     if(passwordOne === passwordTwo){
       createUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        
         record.email = email;
         student_record.email = email;
         student_record.name = name;
@@ -95,7 +96,7 @@ const SignUp = () => {
         axios
         .post("https://ci-gsc.com/user/", record)
         .then((res) => success())
-        .catch((err) => alert("Please fillup the mandatory fields, the ones with the asterisks * "));
+        .catch((err) => alert("Temporarily facing server issues. Please contact d_bdc.contacts@yahoo.com for further details"));
         
 
         axios

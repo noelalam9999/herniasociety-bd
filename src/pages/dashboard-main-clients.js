@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from "react";
+import React, { useContext, useEffect,useState,useMemo } from "react";
 import Link from "next/link";
 import CountUp from "react-countup";
 import LazyLoad from "react-lazyload";
@@ -8,13 +8,16 @@ import GlobalContext from "../context/GlobalContext";
 import { useAuth } from '../../AuthUserContext';
 import imgP1 from "../assets/image/table-one-profile-image-1.png";
 import ProfilePicture from "../sections/agents/ProfilePicture";
+import Moment from 'react-moment';
 
 const DesiredLevel = [
-  { value: "Under-graduate", label: "Under-graduate" },
-  { value: "Post-graduate", label: "Post-Graduate" },
-  { value: "Diploma", label: "Diploma" },
-  
-];
+  {name:"Desiredlevel", value: 'HSC', label: 'HSC' },
+  {name:"Desiredlevel", value: 'Alevel', label: 'Alevel' },
+  {name:"Desiredlevel", value: 'undergrad', label: 'Undergraduate' },
+  {name:"Desiredlevel", value: 'postgrad', label: 'Postgraduate' },
+  {name:"Desiredlevel", value: 'diploma', label: 'Diploma' },
+  {name:"Desiredlevel", value: 'other', label: 'Other' },
+]
 const DesiredCountry = [
   { value: "UK", label: "U.K." },
   { value: "USA", label: "U.S.A." },
@@ -34,10 +37,10 @@ const IELTS = [
 const DashboardMain = () => {
  
   const [List, setList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
+  
+  async function fetchMyAPI() {
 
-  useEffect(() =>  {
-
-    async function fetchMyAPI() {
     try {
       const res = await fetch('https://ci-gsc.com/students/?format=json');
       console.log(res)
@@ -46,12 +49,29 @@ const DashboardMain = () => {
     } catch (e) {
       console.log(e);
   }
+
+  }
+
+  function getFilteredList() {
+    console.log( selectedCategory)
+    // Avoid filter when selectedCategory is null
+    if (!selectedCategory) {
+      return List;
     }
-    
-fetchMyAPI()
-    
-  },[])
+    return List.filter(function(val, i, a) {
+      return val.Desiredlevel==selectedCategory;})
+  } 
+
+  const handleCategoryChange = selectedOption => {
+    setSelectedCategory(selectedOption.value);
+  };
 console.log(List)
+  useEffect(() =>  {
+fetchMyAPI()    
+  },[]) 
+  var filteredList = useMemo(getFilteredList, [selectedCategory, List]);
+
+
 
   const gContext = useContext(GlobalContext);
   return (
@@ -68,7 +88,7 @@ console.log(List)
           <div className="container">
             
             <div className="mb-14">
-            <div className="row mb-11 align-items-center">
+            <div className="row mb-4 align-items-center">
                 <div className="col-lg-10 mb-lg-0 mb-4">
                   <h3 className="font-size-6 mb-0">Clients</h3>
                 </div>
@@ -90,35 +110,35 @@ console.log(List)
                     </div>
                     
               </div>
-              <div className="row mb-11 align-items-center">
+              <div className="row mb-2 align-items-center">
              
-             <div className="col-lg-4">
+             {/* <div className="col-lg-12">
                <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                <h4 className="font-size-4 mb-0">Desired Level</h4>
                  
                </div>
-             </div>
+             </div> */}
     
-             <div className="col-lg-4">
+             {/* <div className="col-lg-4">
                <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                <h4 className="font-size-4 mb-0">Desired Country</h4>
                  
                </div>
-             </div>
-      
+             </div> */}
+{/*       
              <div  className="col-lg-4">
                <div style={{marginLeft:"20px!important"}} className="d-flex flex-wrap align-items-right justify-content-lg-end">
                <h4 className="font-size-4 mb-0">IELTS</h4>
                  
                </div>
-             </div>
+             </div> */}
              
   
            </div>
-              <div className="row mb-11 align-items-center">
+              <div className="row mb-2 align-items-center">
              
            
-              <div className="col-lg-4">
+              <div className="col-lg-12">
                   <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                   
                     <div className="h-px-48">
@@ -126,11 +146,12 @@ console.log(List)
                         options={DesiredLevel}
                         className="pl-0 h-100 arrow-3 arrow-3-black min-width-px-273  text-black-2 d-flex align-items-center w-100"
                         border={false}
+                        onChange={handleCategoryChange}
                       />
                     </div>
                   </div>
                 </div>
-            
+{/*             
                 <div className="col-lg-4">
                   <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                   
@@ -143,9 +164,9 @@ console.log(List)
                     </div>
                   </div>
                 </div>
-            
+             */}
                 
-                <div className="col-lg-4">
+                {/* <div className="col-lg-4">
                   
                   <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                   
@@ -158,7 +179,7 @@ console.log(List)
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               
             
@@ -173,87 +194,87 @@ console.log(List)
                         >
                           Name
                         </th>
-                        <th className="th-sticky"
+                        <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >
                           Added By
                         </th>
-                        <th  className="th-sticky"
+                        <th
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >
                           Gender   
                         </th>
                    
                     
-                        <th  className="th-sticky"
+                        <th  
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >
                           Phone
                         </th>
-                        <th  className="th-sticky"
+                        <th  
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >
                           Email
                         </th>
-                        <th className="th-sticky"
+                        <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >
                           Date of Birth  
                         </th>
-                        <th  className="th-sticky"
+                     
+                        <th  
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
-                        >Passport </th>
-                        <th  className="th-sticky"
-                          scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Country</th>
-                            <th  className="th-sticky"
+                            <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Address</th>
-                           <th  className="th-sticky"
+                           <th  
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Previous Qualification</th>
-                           <th  className="th-sticky"
+                           <th
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >IELTS Band</th>
-                         <th className="th-sticky"
+                         <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Desired Level</th>
-                         <th  className="th-sticky"
+                         <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Study Destination</th>
-                         <th  className="th-sticky"
+                         <th  
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className=" th-sticky border-0 font-size-4 font-weight-normal"
                         >Intended Semester</th>
-                         <th className="th-sticky"
+                         <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
                         >Desired Subject</th>
-                        
+                        <th 
+                          scope="col"
+                          className="th-sticky border-0 font-size-4 font-weight-normal"
+                        >Created At</th>
                           
                       
                       </tr>
                     </thead>
                     <tbody>
                      
-                      { List.map((item, index)=>(
+                      { filteredList.reverse().map((item, index)=>(
                         <tr className="border border-color-2">
                         <th scope="row" className="pl-6 border-0 py-7 pr-0">
                           <Link href={`/student-admin/`+item.id}>
                             <a className="media min-width-px-235 align-items-center">
-                              <ProfilePicture email={item.email}/>
+                              {/* <ProfilePicture email={item.email}/> */}
                               <h4 className="font-size-4 mb-0 font-weight-semibold text-black-2">
                                 {item.name}
                               </h4>
@@ -286,20 +307,7 @@ console.log(List)
                           </h3>
                         </td>
                         
-                        <td className="table-y-middle py-7 min-width-px-170 pr-0">
-                        <div className="">
-                            <a
-                              href="/#"
-                              className="font-size-3 font-weight-bold text-black-2 text-uppercase"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                gContext.toggleApplicationModal();
-                              }}
-                            >
-                              View Passport
-                            </a>
-                          </div>
-                        </td>
+                       
                         <td className="table-y-middle py-7 min-width-px-170 pr-0">
                           <h3 className="font-size-4 font-weight-normal text-black-2 mb-0">
                           {item.country} 
@@ -339,6 +347,15 @@ console.log(List)
                           <h3 className="font-size-4 font-weight-normal text-black-2 mb-0">
                           {item.DesiredSubject}
                           </h3>
+                        </td>
+                        <td className="table-y-middle py-7 min-width-px-110 pr-0">
+                          <div className="">
+                            <Link href="/contact">
+                              <a className="font-size-3 font-weight-bold text-black-2 text-uppercase">
+                              <Moment format="YYYY/MM/DD">{item.created_at}</Moment>
+                              </a>
+                            </Link>
+                          </div>
                         </td>
                         <td className="table-y-middle py-7 min-width-px-110 pr-0">
                          <div className="">

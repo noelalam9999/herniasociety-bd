@@ -23,9 +23,9 @@ const Sidebar = (List) => {
           {/* <!-- Top Start --> */}
           <div className="bg-white shadow-9 rounded-4">
             <div className="px-5 py-11 text-center border-bottom border-mercury">
-              <Link href={"/university/"+item.id}>
+              <Link href={"/university/"+item.id}>  
                 <a className="mb-4">
-                 <ProfilePicture email={item.email} />
+                 {/* <ProfilePicture email={item.email} /> */}
                 </a>
               </Link>
               <h4 className="mb-0">

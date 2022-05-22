@@ -12,6 +12,7 @@ import iconF4 from "../../../assets/image/l1/png/post-study-work-visa.png";
 import iconF5 from "../../../assets/image/l1/png/work-while-studying.png";
 import Unilogo from "../../../sections/uni/Unilogo";
 import { useRouter } from 'next/router';
+
 const defaultCountries = [
   { value: "uk", label: "United Kingdom" },
   { value: "usa", label: "United States of America" },
@@ -31,6 +32,7 @@ const SearchGrid = () => {
   const [userList, setUserList] = useState([]);
   const [count, setCount] = useState(8);
   const [config,setConfig] = useState({
+
     Undergraduate: true,
     Diploma:true,
     Masters:true,
@@ -72,7 +74,9 @@ const SearchGrid = () => {
       let filtered_3 = []
       let filtered_4 = []
       let filtered_ranking = []
+
       todoList = todoList.filter(function(val, i, a) {return val.country=="Australia";})
+
       if(config.Undergraduate == true){
           filtered = filtered.concat(todoList.filter(function(val, i, a) {return val.UGfee!=null;}))
       }
@@ -106,12 +110,6 @@ const SearchGrid = () => {
      
       setList(uniqueNames)
 
-
-
-
-
-
- 
     } catch (e) {
       console.log(e);
   }
@@ -274,7 +272,7 @@ function Loadmore (){
                                   </a>
                                 </Link>
                                 <h2 className="mt-n4">
-                                  <Link href="/#">
+                                <Link href={"/university/"+item.id}>
                                     <a className="font-size-7 text-black-2 font-weight-bold mb-4">
                                     {item.name}
                                     </a>

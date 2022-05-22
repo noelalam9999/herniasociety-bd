@@ -6,7 +6,7 @@ import PageWrapper from "../../components/PageWrapper";
 import { Select } from "../../components/Core";
 import GlobalContext from "../../context/GlobalContext";
 import { useAuth } from '../../../AuthUserContext';
-
+import ProfileSidebarUniversity from "../../components/ProfileSidebar/ProfileSidebarUniversity";
 import UniLogo from "../../sections/agents/UniLogo";
 import UniRows from "../../sections/student/UniRows";
 
@@ -30,10 +30,26 @@ const Accomodationfee = [
 const DashboardMain = () => {
  
   const [List, setList] = useState([]);
+  const [Selected, setSelected] = useState([]);
   const { authUser, loading,signOut } = useAuth();
   const [uniList, setUniList] = useState([]);
   const [uniApplicationList, setApplicationList] = useState([]);
+  const [isActive,setIsActive] = useState(false)
+
+  async function onRowClick(item){
+    try {
+      console.log(item)
+      const res = await fetch('https://ci-gsc.com/uni/');
   
+      const todoList = await res.json();
+      const filtered = todoList.filter(function(val, i, a) {return val.id==item.id;});
+      setSelected(filtered)
+      
+    } catch (e) {
+      console.log(e);
+  }
+  }
+
   useEffect(() =>  {
 
     async function fetchMyAPI3() {
@@ -49,11 +65,35 @@ const DashboardMain = () => {
         console.log(e);
     }
       }
+      async function fetchMyAPI2() {
+        try {
+   
+    const res = await fetch('https://ci-gsc.com/students/?format=json');
+    
+    const todoList = await res.json();
+    let filtered = await todoList.filter(function(val, i, a) {return val.email==authUser;})
+    console.log(filtered[0])
+    if(filtered[0].country!="" || filtered[0].gender!="" || filtered[0].birth_date!="" || filtered[0].birth_month!="" ||filtered[0].birth_year!="" ||filtered[0].address1!="" ||filtered[0].prev_qualification!="" || filtered[0].Desiredlevel!="" || filtered[0].StudyDestination!="" || filtered[0].IntendedSemester!="" ||filtered[0].DesiredSubject!=""){
+    if(filtered[0].IELTSBand==null & filtered[0].TOEFL==null & filtered[0].PTE==null & filtered[0].Duolingo==null){
+     
+      setIsActive(false)
+      
+    }
+    else{
+      setIsActive(true)
+    }
+      
+    }
+    } catch (e) {
+    console.log(e);
+    }
+    }
       
 
 
 
   fetchMyAPI3()
+  fetchMyAPI2()
 
 
   },authUser)
@@ -70,12 +110,39 @@ const DashboardMain = () => {
           reveal: false,
         }}
       >
-        <div className="dashboard-main-container mt-25 mt-lg-31">
+        <div className="dashboard-main-container mt-25 mt-lg-25">
           <div className="container">
-         
+          { isActive==false &&
+          <>
+              <div className="row mb-3">
+                    <div className="col-xxl-12 col-xl-12 col-lg-12 col-sm-12">
+                      <a
+                        href="/#"
+                        className="media bg-red rounded-4 pl-8 pt-2 pb-2 pr-7 hover-shadow-1 mb-3 shadow-8"
+                      >
+                          <p className="font-size-4 font-weight-normal text-white mb-0">
+                          In order to start applying please fill up your profile details if you have not already.  
+                          </p>
+                      </a>
+                    </div>
+                </div>
+          </>
+          }
             <div className="mb-14">
             <div className="row mb-11 align-items-center">
-             
+          
+        
+  
+            <div className="col-lg-6 mb-lg-0 mb-4">
+                  <h3 className="font-size-6 mb-0">Recommended Universities</h3>
+                </div>
+  
+       
+          
+       
+        </div>
+            <div className="row mb-11 align-items-center">
+          
              <div className="col-lg-4">
                <div className="d-flex flex-wrap align-items-center justify-content-lg-end">
                <h4 className="font-size-4 mb-0">Countries</h4>
@@ -144,30 +211,38 @@ const DashboardMain = () => {
                </div>
              </div>
            </div>
-   
-         
+           <div className="row">
+           <div className="col-12 col-xxl-4 col-lg-4 col-md-5 order-2 mb-11 mb-lg-0">
+                <ProfileSidebarUniversity List={Selected}/>
+              </div>
+           <div className="col-12 col-xxl-8 col-lg-8 col-md-7 order-1 order-xl-1">
               <div className="bg-white shadow-8 pt-7 rounded pb-8 px-11">
-                <div className="table-responsive">
+                <div className="table-responsive2">
                   <table className="table table-striped">
                     <thead>
                       <tr className="th-sticky" >
-                        <th className="th-sticky"
+                        <th 
                           scope="col"
-                          className="pl-0  border-0 font-size-4 font-weight-normal"
+                          className="pl-0 th-sticky border-0 font-size-4 font-weight-normal"
                         >
-                          Name
+                          University Name
                         </th>
                       
                        
                       
-                        <th className="th-sticky"
+                        <th 
                           scope="col"
-                          className="border-0 font-size-4 font-weight-normal"
+                          className=" th-sticky border-0 font-size-4 font-weight-normal"
                         >
-                          Country
+                          
                         </th>
-                     
-                     
+                      
+                        <th 
+                          scope="col"
+                          className=" th-sticky border-0 font-size-4 font-weight-normal"
+                        >
+                          
+                        </th>
                         
 
                        
@@ -176,78 +251,18 @@ const DashboardMain = () => {
                     </thead>
                     <tbody>
                      
-                     <UniRows user={List}/>
+                     <UniRows onRowClick={onRowClick} user={List}/>
                     
                  
                     </tbody>
                   </table>
                 </div>
 
-                {/* <div className="pt-2">
-                  <nav aria-label="Page navigation example">
-                    <ul className="pagination pagination-hover-primary rounded-0 ml-n2">
-                      <li className="page-item rounded-0 flex-all-center">
-                        <a
-                          href="/#"
-                          className="page-link rounded-0 border-0 px-3active"
-                          aria-label="Previous"
-                        >
-                          <i className="fas fa-chevron-left"></i>
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          href="/#"
-                          className="page-link border-0 font-size-4 font-weight-semibold px-3"
-                        >
-                          1
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          href="/#"
-                          className="page-link border-0 font-size-4 font-weight-semibold px-3"
-                        >
-                          2
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a
-                          href="/#"
-                          className="page-link border-0 font-size-4 font-weight-semibold px-3"
-                        >
-                          3
-                        </a>
-                      </li>
-                      <li className="page-item disabled">
-                        <a
-                          href="/#"
-                          className="page-link border-0 font-size-4 font-weight-semibold px-3"
-                        >
-                          ...
-                        </a>
-                      </li>
-                      <li className="page-item ">
-                        <a
-                          href="/#"
-                          className="page-link border-0 font-size-4 font-weight-semibold px-3"
-                        >
-                          7
-                        </a>
-                      </li>
-                      <li className="page-item rounded-0 flex-all-center">
-                        <a
-                          href="/#"
-                          className="page-link rounded-0 border-0 px-3"
-                          aria-label="Next"
-                        >
-                          <i className="fas fa-chevron-right"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div> */}
+               
               </div>
+              </div>
+            
+            </div>
             </div>
 
 

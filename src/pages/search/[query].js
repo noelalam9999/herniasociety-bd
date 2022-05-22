@@ -259,7 +259,7 @@ function Loadmore (){
                            {/* <!-- Start Feature One --> */}
                            <div className="bg-white px-8 pt-9 pb-7 rounded-4 mb-9 feature-cardOne-adjustments">
                              <div className="d-block mb-7">
-                               <Link href="/#">
+                               <Link href={"/university/"+item.id}>
                              <Unilogo email={item.email}/>
                                </Link>
                              </div>
@@ -269,7 +269,7 @@ function Loadmore (){
                                </a>
                              </Link>
                              <h2 className="mt-n4">
-                               <Link href="/#">
+                               <Link href={"/university/"+item.id}>
                                  <a className="font-size-7 text-black-2 font-weight-bold mb-4">
                                  {item.name}
                                  </a>

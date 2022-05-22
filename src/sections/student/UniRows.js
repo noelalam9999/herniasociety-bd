@@ -27,7 +27,7 @@ const Accomodationfee = [
   { value: "1000", label: "<1,000" },
 ];
 
-const UniRows = ({user}) => {
+const UniRows = ({user,onRowClick}) => {
  //console.log(user[0].StudyDestination)
   const [List, setList] = useState([]);
   const { authUser, loading,signOut } = useAuth();
@@ -44,9 +44,9 @@ const UniRows = ({user}) => {
         const res = await fetch('https://ci-gsc.com/uni/');
         const todoList = await res.json();
         let filtered = todoList.filter(function(val, i, a) {return val.country==user[0].StudyDestination;});
-        filtered = filtered.filter(function(val, i, a) {return val.IELTSRequirement<=user[0].IELTSBand;});
+        //filtered = filtered.filter(function(val, i, a) {return val.IELTSRequirement<=user[0].IELTSBand;});
         setUniList(filtered)
-        
+        onRowClick(filtered[0])
       } catch (e) {
         console.log(e);
     }
@@ -78,22 +78,27 @@ const UniRows = ({user}) => {
   return (
     <>
        { uniList.map((item, index)=>(
-                        <tr className="border border-color-2">
+                        <tr onClick={()=> onRowClick(item)} className="border border-color-2">
                         <th scope="row" className="pl-6 border-0 py-7 pr-0">
-                          <Link href={`/university/`+item.id}>
-                            <a className="media min-width-px-235 align-items-center">
+               
+                            <a  className="media min-width-px-235 align-items-center">
                               <UniLogo email ={item.email}/>
                               <h4 className="font-size-4 mb-0 font-weight-semibold text-black-2">
                                 {item.name}
                               </h4>
                             </a>
-                          </Link>
+                         
                         </th>
                    
-                        <td className="table-y-middle py-7 min-width-px-170 pr-0">
-                          <h3 className="font-size-4 font-weight-normal text-black-2 mb-0">
-                            {item.country}
-                          </h3>
+                        <td className="table-y-middle py-7 min-width-px-120 pr-0">
+                        <Link href={`/university/`+item.id}>
+                            <a  className="media min-width-px-170 align-items-center">
+                        
+                              <h4 className="font-size-4 mb-0 font-weight-semibold text-orange">
+                               See details
+                              </h4>
+                            </a>
+                          </Link>
                         </td>
                         <td className="table-y-middle py-7 min-width-px-170 pr-0">
 

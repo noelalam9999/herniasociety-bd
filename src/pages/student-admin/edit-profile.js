@@ -85,9 +85,8 @@ const IntendedSemester = [
   {name:"IntendedSemester", value: "fall", label: "Fall" },
   { name:"IntendedSemester", value: "spring", label: "Spring" },
   {name:"IntendedSemester", value: "summer", label: "Summer" },
-
+  {name:"IntendedSemester", value: "winter", label: "Winter" },
 ];
-
 
 const BirthYear = [
   {name:"birth_year", value: "1990", label: "1990" },
@@ -105,8 +104,9 @@ const BirthYear = [
   {name:"birth_year", value: "2002", label: "2002" },
   {name:"birth_year", value: "2003", label: "2003" },
 ];
+
 const PreviousQualification = [
-  {name:"prev_qualification", value: 'HSC', label: 'HSC' },
+  {name:"prev_qualification", value: 'HSC', label: 'Higher Secondary' },
   {name:"prev_qualification", value: 'Alevel', label: 'Alevel' },
   {name:"prev_qualification", value: 'undergrad', label: 'Undergraduate' },
   {name:"prev_qualification", value: 'postgrad', label: 'Postgraduate' },

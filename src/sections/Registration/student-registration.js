@@ -77,7 +77,7 @@ const IntendedSemester = [
   {name:"IntendedSemester", value: "fall", label: "Fall" },
   { name:"IntendedSemester", value: "spring", label: "Spring" },
   {name:"IntendedSemester", value: "summer", label: "Summer" },
-
+  {name:"IntendedSemester", value: "winter", label: "Winter" },
 ];
 
 
@@ -123,7 +123,7 @@ const IELTSBand = [
 ]
 
 const Desiredlevel = [
-  {name:"Desiredlevel", value: 'HSC', label: 'HSC' },
+  {name:"Desiredlevel", value: 'HSC', label: 'Higher Secondary' },
   {name:"Desiredlevel", value: 'Alevel', label: 'Alevel' },
   {name:"Desiredlevel", value: 'undergrad', label: 'Undergraduate' },
   {name:"Desiredlevel", value: 'postgrad', label: 'Postgraduate' },

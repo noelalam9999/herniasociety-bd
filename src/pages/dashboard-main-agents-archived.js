@@ -95,7 +95,7 @@ return;
             <div className="mb-14">
             <div className="row mb-11 align-items-center">
                 <div className="col-lg-10 mb-lg-0 mb-4">
-                  <h3 className="font-size-6 mb-0">Agents</h3>
+                  <h3 className="font-size-6 mb-0">Archived Agents</h3>
                 </div>
               
              

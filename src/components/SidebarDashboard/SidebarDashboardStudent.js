@@ -2,11 +2,14 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { Collapse } from "react-bootstrap";
 import GlobalContext from "../../context/GlobalContext";
+import { useRouter } from 'next/router';
 //import imgL from "../../assets/image/logo-main-black.png";
 import imgL from "../../assets/favicon2.png";
+
 const SidebarDashboardStudent = () => {
   const gContext = useContext(GlobalContext);
-
+  const router = useRouter();
+  const path = router.asPath;
   return (
     <>
       <Collapse in={gContext.showSidebarDashboard}>
@@ -19,7 +22,7 @@ const SidebarDashboardStudent = () => {
             </Link>
           </div>
           <div className="my-15 px-11">
-            <Link href="/search/1">
+            <Link href="/students/student-dashboard-uni">
               <a className="btn btn-primary btn-xl w-100 text-uppercase">
                 <span className="mr-5 d-inline-block">+</span>Apply to a Uni
               </a>
@@ -27,28 +30,49 @@ const SidebarDashboardStudent = () => {
           </div>
           <ul className="list-unstyled dashboard-layout-sidebar">
             <li className="">
-              <Link href="/students/student-dashboard">
+            { path=="/students/student-dashboard" && 
+                <a className="btn-primary text-white px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/monitor_yahvra.png" alt="" />Dashboard
+                </a>
+             
+}
+{ path!="/students/student-dashboard" && <Link href="/students/student-dashboard">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/monitor_yahvra.png" alt="" />Dashboard
                 </a>
               </Link>
+}
             </li>
             <li className="">
-              <Link href="/students/student-dashboard-applications">
+            { path=="/students/student-dashboard-applications" && 
+                <a className="btn-primary text-white  px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/resume_h1xatk.png" alt="" />Applications
+                </a>
+             }
+              { path!="/students/student-dashboard-applications" &&  <Link href="/students/student-dashboard-applications">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640903931/resume_h1xatk.png" alt="" />Applications
                 </a>
-              </Link>
+                </Link> 
+             }  
             </li>
             <li className="">
-              <Link href="/students/student-dashboard-approved">
+            { path=="/students/student-dashboard-approved" &&  
+                <a className="btn-primary text-white  px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
+                <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640905537/checked_ticvfe.png" alt="" />Approved{" "}
+                  {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
+                    1
+                  </span> */}
+                </a>
+         }
+              { path!="/students/student-dashboard-approved" &&   <Link href="/students/student-dashboard-approved">
                 <a className="px-10 py-1 my-5 font-size-4 font-weight-semibold flex-y-center">
                 <img class="mr-7" style={{marginRight:"3px"}} height="25px" src="https://res.cloudinary.com/dl2tsdbcf/image/upload/v1640905537/checked_ticvfe.png" alt="" />Approved{" "}
                   {/* <span className="ml-auto px-1 h-1 bg-dodger text-white font-size-3 rounded-5 max-height-px-18 flex-all-center">
                     1
                   </span> */}
                 </a>
-              </Link>
+              </Link> }
             </li>
             {/* <li className="">
               <Link href="/dashboard-settings">

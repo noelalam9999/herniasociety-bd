@@ -83,7 +83,7 @@ alert("please type in your email")
     
     }
     } catch (e) {
-      console.log(e);
+      alert("Temporarily facing server issues. Please contact d_bdc.contacts@yahoo.com for further details")
   }
 
     }

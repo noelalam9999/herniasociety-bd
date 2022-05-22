@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Select } from "../../../components/Core";
 import {Container, Row, Col, Button, Form, FormGroup, Label, Input, Alert} from 'reactstrap';
 const Desiredlevel = [
-  {name:"Desiredlevel", value: 'HSC', label: 'HSC' },
+  {name:"Desiredlevel", value: 'HSC', label: 'Higher Secondary' },
   {name:"Desiredlevel", value: 'Alevel', label: 'Alevel' },
   {name:"Desiredlevel", value: 'undergrad', label: 'Undergraduate' },
   {name:"Desiredlevel", value: 'postgrad', label: 'Postgraduate' },

@@ -10,6 +10,7 @@ import axios from 'axios';
 import ProfilePicture from "../sections/agents/ProfilePicture";
 import moment from 'moment'
 import Moment from 'react-moment';
+
 const Services = [
   { value: "Ticketing", label: "Ticketing" },
   { value: "Visa", label: "Visa" },
@@ -95,7 +96,7 @@ return;
             <div className="mb-14">
             <div className="row mb-11 align-items-center">
                 <div className="col-lg-10 mb-lg-0 mb-4">
-                  <h3 className="font-size-6 mb-0">Agents</h3>
+                  <h3 className="font-size-6 mb-0">Active Agents</h3>
                 </div>
               
              
@@ -362,26 +363,19 @@ return;
                             {item.recruitment_area}
                           </h3>
                         </td>
-                       
+                        <td className="table-y-middle py-7 min-width-px-170 pr-0">
+                          <h3 className="font-size-4 font-weight-normal text-black-2 mb-0">
+                          {item.charge}
+                          </h3>
+                        </td>
+                        <td className="table-y-middle py-7 min-width-px-170 pr-0">
+                          <h3 className="font-size-4 font-weight-normal text-black-2 mb-0">
+                          {item.students_sent_abroad}
+                          </h3>
+                        </td>
                 
-                        <td className="table-y-middle py-7 min-width-px-110 pr-0">
-                          <div className="">
-                            <Link href="/contact">
-                              <a className="font-size-3 font-weight-bold text-green text-uppercase">
-                                {item.charge}
-                              </a>
-                            </Link>
-                          </div>
-                        </td>
-                        <td className="table-y-middle py-7 min-width-px-110 pr-0">
-                          <div className="">
-                            <Link href="/contact">
-                              <a className="font-size-3 font-weight-bold text-black-2 text-uppercase">
-                                {item.students_sent_abroad}
-                              </a>
-                            </Link>
-                          </div>
-                        </td>
+                      
+                   
                         <td className="table-y-middle py-7 min-width-px-110 pr-0">
                           <div className="">
                             <Link href="/contact">

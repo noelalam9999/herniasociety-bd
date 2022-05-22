@@ -476,7 +476,7 @@ router.push('/students/student-dashboard');
                           htmlFor="namedash"
                           className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
                         >
-                         SSC Completetion Certificate
+                         SSC Completion Certificate
                         </label>
                         <input 
                               type="file"

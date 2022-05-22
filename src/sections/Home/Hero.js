@@ -1,8 +1,8 @@
 import React,{ useState } from "react";
 import { Button } from "react-bootstrap";
 import { Select } from "../../components/Core";
-import imgP from "../../assets/image/l1/png/hero-image-3.png";
-import imgQ from "../../assets/image/l1/png/hero-main-mobile.png";
+import imgP from "../../assets/image/l1/png/hero-image-3.jpg";
+import imgQ from "../../assets/image/l1/png/hero-main-mobile.jpg";
 import imgH from "../../assets/image/patterns/hero-pattern.png";
 
 import { useRouter } from 'next/router';

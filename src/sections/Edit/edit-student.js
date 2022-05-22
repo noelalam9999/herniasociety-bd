@@ -85,7 +85,7 @@ const IntendedSemester = [
   {name:"IntendedSemester", value: "fall", label: "Fall" },
   { name:"IntendedSemester", value: "spring", label: "Spring" },
   {name:"IntendedSemester", value: "summer", label: "Summer" },
-
+  {name:"IntendedSemester", value: "winter", label: "Winter" },
 ];
 
 
@@ -106,7 +106,7 @@ const BirthYear = [
   {name:"birth_year", value: "2003", label: "2003" },
 ];
 const PreviousQualification = [
-  {name:"prev_qualification", value: 'HSC', label: 'HSC' },
+  {name:"prev_qualification", value: 'HSC', label: 'Higher Secondary' },
   {name:"prev_qualification", value: 'Alevel', label: 'Alevel' },
   {name:"prev_qualification", value: 'undergrad', label: 'Undergraduate' },
   {name:"prev_qualification", value: 'postgrad', label: 'Postgraduate' },
@@ -265,7 +265,6 @@ setUGCGPA(filtered[0].UGCGPA== null ? "" :filtered[0].UGCGPA)
 setTOEFL(filtered[0].TOEFL== null ? "" : filtered[0].TOEFL)
 setPTE(filtered[0].PTE == null ? "" : filtered[0].PTE)
 setDuolingo(filtered[0].Duolingo == null ? "" : filtered[0].Duolingo)
-
 setwork_experience(filtered[0].work_experience == null ? "" : filtered[0].work_experience)
 setprev_institution(filtered[0].prev_institution == null ? "" : filtered[0].prev_institution)
 setparents_name(filtered[0].parents_name == null ? "" : filtered[0].parents_name)
@@ -406,7 +405,7 @@ const handleSubmit = (item) => {
   student_record.address1=address1 == null ? "" : address1,
   student_record.address2=address2 == null ? "" : address2,
   student_record.prev_qualification=prev_qualification_data== null ? "" : prev_qualification_data,
-  student_record.IELTSBand=IELTSBand == null ? "" : IELTSBand,
+  student_record.IELTSBand=IELTSBand == null ? "" : IELTSBanddata,
   student_record.TOEFL=TOEFL == null ? "" : TOEFL,
   student_record.Duolingo=Duolingo == null ? "" : Duolingo,
   student_record.PTE=PTE == null ? "" : PTE,
@@ -424,13 +423,12 @@ const handleSubmit = (item) => {
   student_record.parents_email=parents_email == null ? "" : parents_email,
   student_record.parents_profession=parents_profession == null ? "" : parents_profession,
   student_record.extracurricular=extracurricular == null ? "" : extracurricular,
-  
   student_record.added_by = added_by == null ? "" : added_by
 
-  if (item.id) {
-    console.log(item)
+  if (student_record.id) {
+    console.log(student_record)
     axios
-      .put(`https://ci-gsc.com/students/`, item)
+      .put(`https://ci-gsc.com/students/${student_record.id}/`, student_record)
       .then((res) => success())
       .catch((err) => console.log(err));
     return;
@@ -474,7 +472,7 @@ function RouterPush(){
               <div className="row">
                 <div className="col-xxxl-9 px-lg-13 px-6">
                   <h5 className="font-size-6 font-weight-semibold mb-11">
-                     Your Profile
+                     Student Profile
                   </h5>
                   <div className="contact-form bg-white shadow-8 rounded-4 pl-sm-10 pl-4 pr-sm-11 pr-4 pt-15 pb-13">
                     
@@ -735,16 +733,113 @@ function RouterPush(){
                               >
                                 IELTS Band
                               </label>
-                              <Select
-                                options={IELTSBand}
-                                className="form-control pl-0 arrow-3 w-100 font-size-4 d-flex align-items-center w-100 "
-                                border={false}
-                                onChange={onIELTSBandChange}
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="IELTSBand"
+                                placeholder="Your IELTS Band"
+                                onChange={(event) => setIELTSBand(event.target.value)}
                                 value={IELTSBanddata}
                               />
                               <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
                             </div>
                           </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                TOEFL
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="TOEFL"
+                                placeholder="Your TOEFL Score"
+                                onChange={(event) => setTOEFL(event.target.value)}
+                                value={TOEFL}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Duolingo
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="Duolingo"
+                                placeholder="Your Duolingo Score"
+                                onChange={(event) => setDuolingo(event.target.value)}
+                                value={Duolingo}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                PTE
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="PTE"
+                                placeholder="Your PTE Score"
+                                onChange={(event) => setPTE(event.target.value)}
+                                value={PTE}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                HSC GPA
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="IELTSBand"
+                                placeholder="Your IELTS Band"
+                                onChange={(event) => setHSCGPA(event.target.value)}
+                                value={HSCGPA}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                UG CGPA
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="UG CGPA"
+                                placeholder="Your Undergraduate Score"
+                                onChange={(event) => setUGCGPA(event.target.value)}
+                                value={UGCGPA}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                         
                         </div>
                         <div className="row mb-8">
                           <div className="col-lg-6 mb-xl-0 mb-7">
@@ -832,7 +927,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="work_experience"
-                                placeholder="Your City"
+                                placeholder="Work Experience"
                                 onChange={(event) => setwork_experience(event.target.value)}
                                 value={work_experience}
                               />
@@ -850,7 +945,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="prev_institution"
-                                placeholder="Your City"
+                                placeholder="Previous Institution"
                                 onChange={(event) => setprev_institution(event.target.value)}
                                 value={prev_institution}
                               />
@@ -868,7 +963,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="parents_name"
-                                placeholder="Your City"
+                                placeholder="Parents Name"
                                 onChange={(event) => setparents_name(event.target.value)}
                                 value={parents_name}
                               />
@@ -886,7 +981,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="parents_contact_number"
-                                placeholder="Your City"
+                                placeholder="Parents Contact Number"
                                 onChange={(event) => setparents_contact_number(event.target.value)}
                                 value={parents_contact_number}
                               />
@@ -904,7 +999,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="parents_email"
-                                placeholder="Your City"
+                                placeholder="Parents Email"
                                 onChange={(event) => setparents_email(event.target.value)}
                                 value={parents_email}
                               />
@@ -922,7 +1017,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="parents_profession"
-                                placeholder="Your City"
+                                placeholder="Parents Profession"
                                 onChange={(event) => setparents_profession(event.target.value)}
                                 value={parents_profession}
                               />
@@ -940,7 +1035,7 @@ function RouterPush(){
                                 type="text"
                                 className="form-control h-px-48"
                                 name="extracurricular"
-                                placeholder="Your City"
+                                placeholder="Extra-Curricular"
                                 onChange={(event) => setextracurricular(event.target.value)}
                                 value={extracurricular}
                               />
@@ -954,7 +1049,7 @@ function RouterPush(){
                               type="button"
                               value="Save Change"
                               className="btn btn-green btn-h-60 text-white min-wvalueth-px-210 rounded-5 text-uppercase"
-                              onClick={() => handleSubmit(record)}
+                              onClick={() => handleSubmit(student_record)}
                          /></span><span style={{paddingLeft:"10px"}}>
                           <input
                               disabled ={false}

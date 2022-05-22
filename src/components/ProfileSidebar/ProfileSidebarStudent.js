@@ -34,7 +34,7 @@ const ProfileSidebarStudent = (List) => {
                 </Link>
               </p>
               <p className="mb-0">
-              <Link href={'/student/edit-agent/'+item.id}>
+              <Link href={'/student/edit/'+item.id}>
                   <a className="text-blue font-weight-semibold font-size-5">Edit</a>
                 </Link>
               </p>

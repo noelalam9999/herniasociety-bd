@@ -22,14 +22,14 @@ const ApplicationButton = ({Student,uni}) => {
       if(Complete){  
       record.client_name = Student
       record.partner = uni
-      console.log(record)
+   
       axios
       .post("https://ci-gsc.com/application/", record)
       .then((res) => alert("Your request for application has been received. GSC will evaluate and reach out to you shortly"))
       .catch((err) => alert("Failed to Apply the Student. Please contact Admin "));
     }
     else{
-      alert("please complete your profile creation in edit profile if you are a Student")
+      alert("Please complete your profile in edit profile if you want to Apply")
     }
     }
     useEffect(() =>  {
@@ -40,7 +40,7 @@ const ApplicationButton = ({Student,uni}) => {
         
           let todoList = await res.json();
           const student = todoList.filter(function(val, i, a) {return val.email==Student;});
-          console.log(student)
+
           if(student[0].address1 == null || student[0].address2 ==null || student[0].IELTSBand ==null || student[0].Desiredlevel == null || student[0].IntendedSemester ==null){
             console.log(student.address1 + student.address2 + student.IELTSBand +student.Desiredlevel + student.IntendedSemester)
             setComplete(false)
@@ -62,7 +62,7 @@ const ApplicationButton = ({Student,uni}) => {
             const todoList = await res.json();
             let filtered = todoList.filter(function(val, i, a) {return val.client_name==Student;});
             filtered = filtered.filter(function(val, i, a) {return val.partner==uni;});
-            console.log(filtered)
+   
             setApplicationList(filtered)
             
           } catch (e) {

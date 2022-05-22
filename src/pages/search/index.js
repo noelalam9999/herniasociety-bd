@@ -269,7 +269,7 @@ function Loadmore (){
                                </a>
                              </Link>
                              <h2 className="mt-n4">
-                               <Link href="/#">
+                             <Link href={"/university/"+item.id}>
                                  <a className="font-size-7 text-black-2 font-weight-bold mb-4">
                                  {item.name}
                                  </a>

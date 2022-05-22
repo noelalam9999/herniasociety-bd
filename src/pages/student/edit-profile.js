@@ -85,7 +85,7 @@ const IntendedSemester = [
   {name:"IntendedSemester", value: "fall", label: "Fall" },
   { name:"IntendedSemester", value: "spring", label: "Spring" },
   {name:"IntendedSemester", value: "summer", label: "Summer" },
-
+  {name:"IntendedSemester", value: "winter", label: "Winter" },
 ];
 
 
@@ -106,7 +106,7 @@ const BirthYear = [
   {name:"birth_year", value: "2003", label: "2003" },
 ];
 const PreviousQualification = [
-  {name:"prev_qualification", value: 'HSC', label: 'HSC' },
+  {name:"prev_qualification", value: 'HSC', label: 'Higher Secondary' },
   {name:"prev_qualification", value: 'Alevel', label: 'Alevel' },
   {name:"prev_qualification", value: 'undergrad', label: 'Undergraduate' },
   {name:"prev_qualification", value: 'postgrad', label: 'Postgraduate' },
@@ -181,24 +181,49 @@ const EditStudent =() => {
   const [StudyDestinationdata,setStudyDestination] = useState("")
   const [IntendedSemesterdata,setIntendedSemester] = useState("")
   const [DesiredSubjectdata,setDesiredSubject] = useState("")
+  const [TOEFL, setTOEFL] =  useState("");
+  const [PTE, setPTE] =  useState("");
+  const [EnglishTestdata, setEnglishTest] =  useState("");
+  const [Duolingo, setDuolingo] =  useState("");
+  const [work_experience, setwork_experience] = useState("");
+  const [prev_institution, setprev_institution] = useState("");
+  const [parents_name, setparents_name] = useState("");
+  const [parents_contact_number, setparents_contact_number] = useState("");
+  const [parents_email, setparents_email] = useState("");
+  const [parents_profession, setparents_profession] = useState("");
+  const [extracurricular, setextracurricular] = useState("");
+  const [HSCGPA, setHSCGPA] = useState("");
+  const [UGCGPA, setUGCGPA] = useState("");
   const [added_by,setadded_by] = useState("")
-  const [record,setRecord] = useState( {  
-    email:"",
+  const [student_record,setRecord] = useState( {  
+    email: '',
     name:"",
     mobile:"",
-    country:"",
-    gender:"female",
-    birth_date:"2",
-    birth_month:"feb",
-    birth_year:"1991",
-    address1:"",
-    address2:"",
-    prev_qualification:"",
-    IELTSBand:"",
     Desiredlevel:"",
     StudyDestination:"",
-    IntendedSemester:"",
-    DesiredSubject:"",
+    country:"",
+    gender:"",
+    birth_date:"",
+    birth_month:"",
+    birth_year:"",
+    address1:"",
+    address2:"",
+    prev_qualification:"Alevel",
+    IELTSBand:"",
+    TOEFL:"",
+    Duolingo:"",
+    PTE:"",
+    HSCGPA:"",
+    UGCGPA:"",
+    IntendedSemester:"spring",
+    DesiredSubject:"Science",
+    work_experience:"",
+    prev_institution:"",
+    parents_name:"",
+    parents_contact_number:"",
+    parents_email:"",
+    parents_profession:"",
+    extracurricular:"",
     added_by:""
   })
   const router = useRouter()
@@ -210,25 +235,37 @@ const res = await fetch('https://ci-gsc.com/students/?format=json');
 const todoList = await res.json();
 let filtered = await todoList.filter(function(val, i, a) {return val.email==authUser;})
 
-setId(filtered[0].id)
-setName(filtered[0].name)
-setEmail(filtered[0].email)
-setMobile(filtered[0].mobile)
-setCountry(filtered[0].country)
-setGender(filtered[0].gender)
-setBirthDate(filtered[0].birth_date)
-setBirthMonth(filtered[0].birth_month)
-setBirthYear(filtered[0].birth_year)
-setAddress1(filtered[0].address1)
-setAddress2(filtered[0].address2)
-setprev_qualification_data(filtered[0].prev_qualification)
-setIELTSBand(filtered[0].IELTSBand)
-setDesiredlevel(filtered[0].Desiredlevel)
-setStudyDestination(filtered[0].StudyDestination)
-setIntendedSemester(filtered[0].IntendedSemester)
-setDesiredSubject(filtered[0].DesiredSubject)
-setadded_by(filtered[0].added_by)
+setId(filtered[0].id )
+setName(filtered[0].name== null ? "" :filtered[0].name)
+setEmail(filtered[0].email== null ? "" :filtered[0].email)
+setMobile(filtered[0].mobile== null ? "" :filtered[0].mobile)
+setCountry(filtered[0].country== null ? "" :filtered[0].country)
+setGender(filtered[0].gender== null ? "" :filtered[0].gender)
+setBirthDate(filtered[0].birth_date== null ? "" :filtered[0].birth_date)
+setBirthMonth(filtered[0].birth_month== null ? "" :filtered[0].birth_month)
+setBirthYear(filtered[0].birth_year== null ? "" :filtered[0].birth_year)
+setAddress1(filtered[0].address1== null ? "" :filtered[0].address1)
+setAddress2(filtered[0].address2== null ? "" :filtered[0].address2)
+setprev_qualification_data(filtered[0].prev_qualification== null ? "" :filtered[0].prev_qualification)
+setIELTSBand(filtered[0].IELTSBand== null ? "" :filtered[0].IELTSBand)
+setDesiredlevel(filtered[0].Desiredlevel== null ? "" :filtered[0].Desiredlevel)
+setStudyDestination(filtered[0].StudyDestination== null ? "" :filtered[0].StudyDestination)
+setIntendedSemester(filtered[0].IntendedSemester== null ? "" :filtered[0].IntendedSemester)
+setDesiredSubject(filtered[0].DesiredSubject== null ? "" :filtered[0].DesiredSubject)
+setadded_by(filtered[0].added_by== null ? "" :filtered[0].added_by)
+setHSCGPA(filtered[0].HSCGPA== null ? "" :filtered[0].HSCGPA)
+setUGCGPA(filtered[0].UGCGPA== null ? "" :filtered[0].UGCGPA)
+setTOEFL(filtered[0].TOEFL== null ? "" : filtered[0].TOEFL)
+setPTE(filtered[0].PTE == null ? "" : filtered[0].PTE)
+setDuolingo(filtered[0].Duolingo == null ? "" : filtered[0].Duolingo)
 
+setwork_experience(filtered[0].work_experience == null ? "" : filtered[0].work_experience)
+setprev_institution(filtered[0].prev_institution == null ? "" : filtered[0].prev_institution)
+setparents_name(filtered[0].parents_name == null ? "" : filtered[0].parents_name)
+setparents_contact_number(filtered[0].parents_contact_number == null ? "" : filtered[0].parents_contact_number)
+setparents_email(filtered[0].parents_email == null ? "" : filtered[0].parents_email)
+setparents_profession(filtered[0].parents_profession == null ? "" : filtered[0].parents_profession)
+setextracurricular(filtered[0].extracurricular == null ? "" : filtered[0].extracurricular)
 
 } catch (e) {
 console.log(e);
@@ -246,7 +283,7 @@ useEffect(() =>  {
 
 
  const success = () => {
-    alert("Student has been updated");
+    alert("Your Record has been updated");
     
      
        if(newImage.length!=0){ 
@@ -346,32 +383,45 @@ useEffect(() =>  {
   };
 
 
-const handleSubmit = (item) => { 
+const handleSubmit = (student_record) => { 
   setDisable(false)
 
-  item.id = id,
-  item.email=email,
-  item.name=name,
-  item.mobile=mobile,
-  item.country=typeof country =="object" ? country.value : country,
-  item.gender= typeof genderdata  == "object" ? genderdata.value : genderdata,
-  item.birth_date=typeof birth_date_data == "object" ? birth_date_data.value : birth_date_data,
-  item.birth_month=typeof birth_month_data == "object" ? birth_month_data.value : birth_month_data,
-  item.birth_year=typeof birth_year_data == "object" ? birth_year_data.value : birth_year_data,
-  item.address1=address1,
-  item.address2=address2,
-  item.prev_qualification=typeof prev_qualification_data == "object" ? prev_qualification_data.value : prev_qualification_data,
-  item.IELTSBand=typeof IELTSBanddata == "object" ? IELTSBanddata.value : IELTSBanddata,
-  item.Desiredlevel=typeof Desiredleveldata == "object" ? Desiredleveldata.value : Desiredleveldata,
-  item.StudyDestination=typeof StudyDestinationdata == "object" ? StudyDestinationdata.value : StudyDestinationdata,
-  item.IntendedSemester=typeof IntendedSemesterdata == "object" ? IntendedSemesterdata.value : IntendedSemesterdata,
-  item.DesiredSubject=typeof DesiredSubjectdata == "object" ? DesiredSubjectdata.value : DesiredSubjectdata 
- item.added_by = added_by
-
-  if (item.id) {
-    console.log(item)
+  student_record.id = id,
+  student_record.email=email,
+  student_record.name=name,
+  student_record.mobile=mobile,
+  student_record.country=typeof country =="object" ? country.value : country,
+  student_record.gender= typeof genderdata  == "object" ? genderdata.value : genderdata,
+  student_record.birth_date=birth_date_data == null ? "" : birth_date_data,
+  student_record.birth_month=birth_month_data == null ? "" : birth_month_data,
+  student_record.birth_year=birth_year_data== null ? "" : birth_year_data,
+  student_record.address1=address1 == null ? "" : address1,
+  student_record.address2=address2 == null ? "" : address2,
+  student_record.prev_qualification=prev_qualification_data== null ? "" : prev_qualification_data,
+  student_record.IELTSBand=IELTSBand == null ? "" : IELTSBanddata,
+  student_record.TOEFL=TOEFL == null ? "" : TOEFL,
+  student_record.Duolingo=Duolingo == null ? "" : Duolingo,
+  student_record.PTE=PTE == null ? "" : PTE,
+  student_record.UGCGPA=UGCGPA == null ? "" : UGCGPA,
+  student_record.HSCGPA=HSCGPA == null ? "" : HSCGPA, 
+  student_record.Desiredlevel=typeof Desiredleveldata == "object" ? Desiredleveldata.value : Desiredleveldata,
+  student_record.StudyDestination=typeof StudyDestinationdata == "object" ? StudyDestinationdata.value : StudyDestinationdata,
+  student_record.IntendedSemester=typeof IntendedSemesterdata == "object" ? IntendedSemesterdata.value : IntendedSemesterdata,
+  student_record.DesiredSubject= typeof DesiredSubjectdata == "object" ? DesiredSubjectdata.value : DesiredSubjectdata,
+  
+  student_record.work_experience=work_experience == null ? "" : work_experience,
+  student_record.prev_institution=prev_institution == null ? "" : prev_institution,
+  student_record.parents_name=parents_name == null ? "" : parents_name,
+  student_record.parents_contact_number=parents_contact_number == null ? "" : parents_contact_number,
+  student_record.parents_email=parents_email == null ? "" : parents_email,
+  student_record.parents_profession=parents_profession == null ? "" : parents_profession,
+  student_record.extracurricular=extracurricular == null ? "" : extracurricular
+  
+  student_record.added_by = added_by == null ? "" : added_by
+  if (student_record.id) {
+   
     axios
-      .put(`https://ci-gsc.com/students/${item.id}/`, item)
+      .put(`https://ci-gsc.com/students/${student_record.id}/`, student_record)
       .then((res) => success())
       .catch((err) => console.log(err));
     return;
@@ -415,25 +465,12 @@ function RouterPush(){
           value=""
         >
           <div className="container">
-          <div className="row justify-content-center">
-              <div className="col-12 dark-mode-texts">
-                <div className="mb-9">
-                  <Link href={'/students/student-dashboard'}>
-                    <a className="d-flex align-items-center ml-4">
-                      <i className="icon icon-small-left bg-white circle-40 mr-5 font-size-7 text-black font-weight-bold shadow-8"></i>
-                      <span className="text-uppercase font-size-3 font-weight-bold text-gray">
-                        Back
-                      </span>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            </div>
+         
             <div className="mb-15 mb-lg-23">
               <div className="row">
                 <div className="col-xxxl-9 px-lg-13 px-6">
                   <h5 className="font-size-6 font-weight-semibold mb-11">
-                     Your Profile
+                     Student Profile
                   </h5>
                   <div className="contact-form bg-white shadow-8 rounded-4 pl-sm-10 pl-4 pr-sm-11 pr-4 pt-15 pb-13">
                     
@@ -496,7 +533,7 @@ function RouterPush(){
                                 className="form-control h-px-48"
                                 name="mobile"
                                 placeholder="Your Phone Number with Country Code"
-                                onChange={(event) => setMobile(event.target.value)}
+                                onChange={(event) => setMobile(event.target.email)}
                                 value={mobile}
                               />
                             </div>
@@ -694,16 +731,113 @@ function RouterPush(){
                               >
                                 IELTS Band
                               </label>
-                              <Select
-                                options={IELTSBand}
-                                className="form-control pl-0 arrow-3 w-100 font-size-4 d-flex align-items-center w-100 "
-                                border={false}
-                                onChange={onIELTSBandChange}
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="IELTSBand"
+                                placeholder="Your IELTS Band"
+                                onChange={(event) => setIELTSBand(event.target.value)}
                                 value={IELTSBanddata}
                               />
                               <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
                             </div>
                           </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                TOEFL
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="TOEFL"
+                                placeholder="Your TOEFL Score"
+                                onChange={(event) => setTOEFL(event.target.value)}
+                                value={TOEFL}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Duolingo
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="Duolingo"
+                                placeholder="Your Duolingo Score"
+                                onChange={(event) => setDuolingo(event.target.value)}
+                                value={Duolingo}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                PTE
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="PTE"
+                                placeholder="Your PTE Score"
+                                onChange={(event) => setPTE(event.target.value)}
+                                value={PTE}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                HSC GPA
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="HSCGPA "
+                                placeholder="Your College GPA"
+                                onChange={(event) => setHSCGPA(event.target.value)}
+                                value={HSCGPA}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                            <div className="form-group position-relative">
+                              <label
+                                htmlFor="address"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                UG CGPA
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                             name="IELTSBand"
+                                placeholder="Your Undergraduate Score"
+                                onChange={(event) => setUGCGPA(event.target.value)}
+                                value={UGCGPA}
+                              />
+                              <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
+                            </div>
+                          </div>
+
                         </div>
                         <div className="row mb-8">
                           <div className="col-lg-6 mb-xl-0 mb-7">
@@ -779,6 +913,132 @@ function RouterPush(){
                               <span className="h-100 w-px-50 pos-abs-tl d-flex align-items-center justify-content-center font-size-6"></span>
                             </div>
                           </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Work Experience
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="work_experience"
+                                placeholder="Your Work Experience"
+                                onChange={(event) => setwork_experience(event.target.value)}
+                                value={work_experience}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Previous Institution
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="prev_institution"
+                                placeholder="Your Previous Institution"
+                                onChange={(event) => setprev_institution(event.target.value)}
+                                value={prev_institution}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Parents Name
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="parents_name"
+                                placeholder="Your Parent's Name"
+                                onChange={(event) => setparents_name(event.target.value)}
+                                value={parents_name}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                               Parents Contact Number
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="parents_contact_number"
+                                placeholder="Your Parents Contact Number"
+                                onChange={(event) => setparents_contact_number(event.target.value)}
+                                value={parents_contact_number}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Parents Email
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="parents_email"
+                                placeholder="Your Parents Email"
+                                onChange={(event) => setparents_email(event.target.value)}
+                                value={parents_email}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Parents Profession
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="parents_profession"
+                                placeholder="Your Parents Profession"
+                                onChange={(event) => setparents_profession(event.target.value)}
+                                value={parents_profession}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-6">
+                          <div className="form-group">
+                              <label
+                                htmlFor="namedash"
+                                className="d-block text-black-2 font-size-4 font-weight-semibold mb-4"
+                              >
+                                Extra-curricular
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control h-px-48"
+                                name="extracurricular"
+                                placeholder="Your Extra-curricular activities"
+                                onChange={(event) => setextracurricular(event.target.value)}
+                                value={extracurricular}
+                              />
+                            </div>
+                          </div>
                         </div>
                       
                        
@@ -787,12 +1047,12 @@ function RouterPush(){
                               type="button"
                               value="Save Change"
                               className="btn btn-green btn-h-60 text-white min-wvalueth-px-210 rounded-5 text-uppercase"
-                              onClick={() => handleSubmit(record)}
+                              onClick={() => handleSubmit(student_record)}
                          /></span><span style={{paddingLeft:"10px"}}>
                           <input
                               disabled ={false}
                               type="button"
-                              value="Go to Home"
+                              value="Go back Home"
                               className="btn btn-green btn-h-60 text-white min-wvalueth-px-210 rounded-5 text-uppercase"
                               onClick={() => RouterPush()}
                          /></span>
